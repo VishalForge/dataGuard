@@ -17,3 +17,20 @@ def check_missing_values(df: pd.DataFrame) -> dict:
         "details": columns_with_nulls
     }
 
+
+def check_duplicates(df: pd.DataFrame) -> dict:
+    duplicate_count = df.duplicated().sum()
+    
+
+    if duplicate_count == 0:
+        severity = "INFO"
+    elif duplicate_count >= 3:
+        severity = "CRITICAL"
+    else:
+        severity = "WARNING"
+    
+    return {
+        "check": "duplicates",
+        "severity": severity,
+        "details": {"duplicate_count": int(duplicate_count)}
+    }
