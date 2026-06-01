@@ -76,3 +76,24 @@ def check_class_imbalance(df: pd.DataFrame, target_col: str) -> dict:
     }
 
  
+def check_high_cardinality(df: pd.DataFrame) -> dict:
+    cardinality_cols = df.columns[df.nunique() / len(df) > 0.5].tolist()
+    cardinality_percentage = (df.nunique() / len(df)) * 100
+
+    max_cardinality = cardinality_percentage.max()
+
+    if max_cardinality >= 90:
+        severity = "CRITICAL"
+    elif max_cardinality >= 50:
+        severity = "WARNING"
+    else:
+        severity = "INFO"
+    
+    return {
+        "check": "cardinality",
+        "severity": severity,
+        "details": {
+            "high_cardinality_cols": cardinality_cols,
+            "cardinality_percentage": cardinality_percentage.round(2).to_dict()
+        }
+    }
