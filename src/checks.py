@@ -34,3 +34,21 @@ def check_duplicates(df: pd.DataFrame) -> dict:
         "severity": severity,
         "details": {"duplicate_count": int(duplicate_count)}
     }
+
+
+def check_constant_columns(df: pd.DataFrame)-> dict:
+    constant_cols = df.columns[df.nunique() == 1].to_list()
+
+    if len(constant_cols) == 0:
+        severity = "INFO"
+    elif len(constant_cols) >= 3:
+        severity = "CRITICAL"
+    else:
+        severity = "WARNING"
+    
+    return{
+        "check": "constant_columns",
+        "severity": severity,
+        "details": {"constant_columns": constant_cols}
+    }
+
