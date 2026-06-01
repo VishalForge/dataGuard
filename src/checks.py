@@ -52,3 +52,27 @@ def check_constant_columns(df: pd.DataFrame)-> dict:
         "details": {"constant_columns": constant_cols}
     }
 
+
+def check_class_imbalance(df: pd.DataFrame, target_col: str) -> dict:
+    imbalance_count = df[target_col].value_counts()
+    imbalance_percentage = df[target_col].value_counts(normalize=True) * 100
+
+    majority_percentage = imbalance_percentage.iloc[0]
+
+    if majority_percentage >= 90:
+        severity = "CRITICAL"
+    elif majority_percentage >= 70:
+        severity = "WARNING"
+    else:
+        severity = "INFO"
+    
+    return {
+        "check": "class_imbalance",
+        "severity": severity,
+        "details": {
+            "class_counts": imbalance_count.to_dict(),
+            "class_percentage": imbalance_percentage.round(2).to_dict()
+        }
+    }
+
+ 
