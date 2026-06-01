@@ -1,6 +1,6 @@
-from src.checks import check_constant_columns
-from src.checks import check_class_imbalance
-from src.checks import check_high_cardinality
+# from src.checks import check_constant_columns
+# from src.checks import check_class_imbalance
+# from src.checks import check_high_cardinality
 import pandas as pd
 
 
@@ -10,7 +10,7 @@ df = pd.DataFrame({
     "gender": ["Male", "Male", "Male"]
 })
 
-print(check_constant_columns(df))
+# print(check_constant_columns(df))
 
 
 df2 = pd.DataFrame({
@@ -19,7 +19,7 @@ df2 = pd.DataFrame({
     "target": [0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
 })
 
-print(check_class_imbalance(df2, "target"))
+# print(check_class_imbalance(df2, "target"))
 
 
 df3 = pd.DataFrame({
@@ -28,4 +28,10 @@ df3 = pd.DataFrame({
     "department": ["HR", "IT", "HR", "IT", "HR", "IT", "HR", "IT", "HR", "IT"]
 })
 
-print(check_high_cardinality(df3))
+# print(check_high_cardinality(df3))
+
+from src.validator import validate
+
+results = validate(df2, target_col='target')
+for result in results:
+    print(result)
