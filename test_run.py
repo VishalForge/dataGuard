@@ -35,3 +35,7 @@ from src.validator import validate
 results = validate(df2, target_col='target')
 for result in results:
     print(result)
+    
+
+from src.report import print_report
+print_report(results)
