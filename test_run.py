@@ -39,3 +39,5 @@ for result in results:
 
 from src.report import print_report
 print_report(results)
+
+df2.to_csv("test_data.csv", index=False)
