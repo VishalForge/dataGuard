@@ -26,15 +26,18 @@ def check_duplicates(df: pd.DataFrame) -> dict:
 
     if duplicate_count == 0:
         severity = "INFO"
+        details = {"message": "No duplicates found"}
     elif duplicate_count >= 3:
         severity = "CRITICAL"
+        details = {"duplicate_count": int(duplicate_count)}
     else:
         severity = "WARNING"
+        details = {"duplicate_count": int(duplicate_count)}
     
     return {
         "check": "duplicates",
         "severity": severity,
-        "details": {"duplicate_count": int(duplicate_count)}
+        "details": details
     }
 
 
@@ -43,15 +46,18 @@ def check_constant_columns(df: pd.DataFrame)-> dict:
 
     if len(constant_cols) == 0:
         severity = "INFO"
+        details = {"message": "No constant columns found"}
     elif len(constant_cols) >= 3:
         severity = "CRITICAL"
+        details = {"constant_columns": constant_cols}
     else:
         severity = "WARNING"
+        details = {"constant_columns": constant_cols}
     
     return{
         "check": "constant_columns",
         "severity": severity,
-        "details": {"constant_columns": constant_cols}
+        "details": details
     }
 
 

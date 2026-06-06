@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DataGuard Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        h1 { color: #1a1a2e; }
+        .check { background: white; padding: 20px; margin: 10px 0; border-radius: 8px; border-left: 6px solid gray; }
+        .CRITICAL { border-left-color: #e74c3c; }
+        .WARNING { border-left-color: #f39c12; }
+        .INFO { border-left-color: #2ecc71; }
+        .severity { font-weight: bold; font-size: 18px; }
+        .CRITICAL .severity { color: #e74c3c; }
+        .WARNING .severity { color: #f39c12; }
+        .INFO .severity { color: #2ecc71; }
+        .details { color: #555; margin-top: 8px; }
+    </style>
+</head>
+<body>
+    <h1>DataGuard Report</h1>
+    
+    <div class="check INFO">
+        <span class="severity">INFO</span>: missing_values
+        <div class="details">
+            
+                No issues found
+            
+
+        </div>
+    </div>
+    
+    <div class="check INFO">
+        <span class="severity">INFO</span>: duplicates
+        <div class="details">
+            
+                No duplicates found
+            
+
+        </div>
+    </div>
+    
+    <div class="check INFO">
+        <span class="severity">INFO</span>: constant_columns
+        <div class="details">
+            
+                No constant columns found
+            
+
+        </div>
+    </div>
+    
+    <div class="check CRITICAL">
+        <span class="severity">CRITICAL</span>: cardinality
+        <div class="details">
+            
+                {'high_cardinality_cols': ['age', 'salary'], 'cardinality_percentage': {'age': 100.0, 'salary': 100.0, 'target': 20.0}}
+            
+
+        </div>
+    </div>
+    
+</body>
+</html>

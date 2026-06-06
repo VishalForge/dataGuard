@@ -16,4 +16,16 @@ def print_report(results: list) -> None:
             console.print(f"[yellow]{severity}: {check} | {details}[/yellow]")
         else:
             console.print(f"[green]{severity}: {check} | {details}[/green]")
+
+
+def generate_html_report(results: list) -> None:
+    from jinja2 import Environment, FileSystemLoader
+
+    env = Environment(loader=FileSystemLoader("src/templates"))
+    template = env.get_template("report_template.html")
+
+    html_output = template.render(results=results)
+
+    with open("report.html", "w") as f:
+        f.write(html_output)
         
