@@ -2,6 +2,17 @@ from src.checks import check_missing_values, check_duplicates, check_constant_co
 import pandas as pd
 
 def validate(df: pd.DataFrame, target_col: str = None) -> list:
+    """
+    Run all  Dataguard checks on the provided DataFrame.
+    
+    Args:
+    df: the dataset to validate
+    target_col: optional name of the target column.
+                Required for class imbalance check.
+    
+    Returns:
+    list of result dicts, one per check
+    """
     results = []
     results.append(check_missing_values(df))
     results.append(check_duplicates(df))

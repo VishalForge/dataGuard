@@ -1,6 +1,17 @@
 import pandas as pd
 
 def check_missing_values(df: pd.DataFrame) -> dict:
+    """
+    Check for missing values across all columns.
+    
+    Severity:
+    CRITICAL: any column has more than 20% missing values
+    WARNING: any column has between 1-20% missing values
+    INFO: no missing values found
+    
+    Returns:
+    dict with keys: check, severity, details
+    """
     null_percentages = (df.isnull().sum()) / len(df) * 100
     columns_with_nulls = null_percentages[null_percentages > 0].to_dict()
     
@@ -21,6 +32,17 @@ def check_missing_values(df: pd.DataFrame) -> dict:
 
 
 def check_duplicates(df: pd.DataFrame) -> dict:
+    """
+    Check for duplicate rows in the dataset.
+    
+    Severity:
+    CRITICAL: 3 or more duplicate rows found
+    WARNING: 1-2 duplicate rows found
+    INFO: no duplicate found
+    
+    Returns:
+    dict with keys: check, severity, details
+    """
     duplicate_count = df.duplicated().sum()
     
 
@@ -42,6 +64,18 @@ def check_duplicates(df: pd.DataFrame) -> dict:
 
 
 def check_constant_columns(df: pd.DataFrame)-> dict:
+    """
+    Check for columns where every value is identical.
+    Constant columns provide no useful signal to ML models.
+    
+    Severity:
+    CRITICAL: 3 or more constant columns found
+    WARNING: 1-2 constant columns found
+    INFO: no constant columns found
+    
+    Returns:
+    dict with keys: check, severity, details
+    """
     constant_cols = df.columns[df.nunique() == 1].to_list()
 
     if len(constant_cols) == 0:
@@ -62,6 +96,22 @@ def check_constant_columns(df: pd.DataFrame)-> dict:
 
 
 def check_class_imbalance(df: pd.DataFrame, target_col: str) -> dict:
+    """
+    Check if the target column has severe class imbalance.
+    Imbalanced targets cause models to predict the majority
+    class and appear accurate while being useless.
+    
+    Args:
+    target_col: name of the target/label column
+    
+    Severity:
+    CRITICAL: majority class is 90% or above
+    WARNING: majority class is between 70-89%
+    INFO: classes are reasonably balanced
+    
+    Returns:
+    dict with keys: check, severity, details
+    """
     if target_col not in df.columns:
         return {
             "check": "class_imbalance",
@@ -91,6 +141,19 @@ def check_class_imbalance(df: pd.DataFrame, target_col: str) -> dict:
 
  
 def check_high_cardinality(df: pd.DataFrame) -> dict:
+    """
+    Check for columns with too many unique values relative to
+    dataset size. High cardinality columns are often identifiers
+    that leak no learnable pattern to models.
+    
+    Severity:
+    CRITICAL: any column has 90% or more unique values
+    WARNING: anu column has between 50-89% unique values
+    INFO: all column has acceptable cardinality
+    
+    Returns:
+    dict with keys: check, severity, details
+    """
     cardinality_cols = df.columns[df.nunique() / len(df) > 0.5].tolist()
     cardinality_percentage = (df.nunique() / len(df)) * 100
 
