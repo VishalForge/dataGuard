@@ -1,8 +1,15 @@
 import typer, pandas as pd
+import logging
 from src.validator import validate
 from src.report import print_report
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
 app = typer.Typer()
+
 
 @app.command()
 def analyze(

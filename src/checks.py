@@ -17,17 +17,20 @@ def check_missing_values(df: pd.DataFrame) -> dict:
     
     if not columns_with_nulls:
         severity = "INFO"
+        details = {"message": "No missing values found"}
     else:
         max_null = max(columns_with_nulls.values())
         if max_null >= 20:
             severity = "CRITICAL"
+            details = columns_with_nulls
         else:
             severity = "WARNING"
+            details = columns_with_nulls
     
     return {
         "check": "missing_values",
         "severity": severity,
-        "details": columns_with_nulls
+        "details": details
     }
 
 
