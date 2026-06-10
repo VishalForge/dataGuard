@@ -59,7 +59,7 @@ dataGuard/
     test_checks.py - pytest tests for all 5 functions
 
 
-```markdown
+
 ## Tech Stack
 
 - **Python** - core language
@@ -67,4 +67,4 @@ dataGuard/
 - **Typer** - CLI interface
 - **Jinja2** - HTML report generation
 - **pytest** - automated testing
-```
+
