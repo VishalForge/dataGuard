@@ -19,11 +19,11 @@
 <body>
     <h1>DataGuard Report</h1>
     
-    <div class="check INFO">
-        <span class="severity">INFO</span>: missing_values
+    <div class="check CRITICAL">
+        <span class="severity">CRITICAL</span>: missing_values
         <div class="details">
             
-                No issues found
+                {'Age': 20.574162679425836, 'Fare': 0.23923444976076555, 'Cabin': 78.22966507177034}
             
 
         </div>
@@ -49,11 +49,21 @@
         </div>
     </div>
     
+    <div class="check INFO">
+        <span class="severity">INFO</span>: class_imbalance
+        <div class="details">
+            
+                {'class_counts': {0: 266, 1: 152}, 'class_percentage': {0: 63.64, 1: 36.36}}
+            
+
+        </div>
+    </div>
+    
     <div class="check CRITICAL">
         <span class="severity">CRITICAL</span>: cardinality
         <div class="details">
             
-                {'high_cardinality_cols': ['age', 'salary'], 'cardinality_percentage': {'age': 100.0, 'salary': 100.0, 'target': 20.0}}
+                {'high_cardinality_cols': ['PassengerId', 'Name', 'Ticket'], 'cardinality_percentage': {'PassengerId': 100.0, 'Survived': 0.48, 'Pclass': 0.72, 'Name': 100.0, 'Sex': 0.48, 'Age': 18.9, 'SibSp': 1.67, 'Parch': 1.91, 'Ticket': 86.84, 'Fare': 40.43, 'Cabin': 18.18, 'Embarked': 0.72}}
             
 
         </div>
